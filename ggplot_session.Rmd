@@ -209,19 +209,54 @@ g
 
 ## Error bars
 
-Instead of using the summarySE function, you can create a summary data frame with tidyverse (thanks Frank!).
+Instead of using the summarySE function, you can create a summary data frame with tidyverse. It has the advantage of using the same grammar as ggplot, doesn't require an external library or function, and is faster.
 
-```{r, echo = T, tidy = T}
+```{r, echo = T, tidy = T, warnings = F, message = F}
 # install.packages("tidyverse") 
 library(tidyverse)
 
 iris2 <- iris %>% 
 	group_by(Species) %>% 
 	summarise(
+	  N = n(),
 		mean = mean(Petal.Width), 
 		sd = sd(Petal.Width),
-		se = sd / sqrt(50)) 
+		se = sd / sqrt(50),
+		ci = qt(.975, N - 1) * se ) 
 ```
+
+---
+
+If you want to compare the speed between the summarySE function and the tidyverse approach, run the following code. For small data sets like this it doesn't really matter, if you are working with more data it makes a difference...
+
+```{r, echo = F, fig.cap="speed comparisson between summarySE() and the tidy approach."}
+library(microbenchmark)
+
+tidy.sum <- function(df){
+  df %>% 
+	group_by(Species) %>% 
+	summarise(
+	  N = n(),
+		mean = mean(Petal.Width), 
+		sd = sd(Petal.Width),
+		se = sd / sqrt(50),
+		ci = qt(.975, N - 1) * se )
+}
+
+SE.sum <- function(df){
+  summarySE(df, measurevar = "Petal.Width", groupvars = "Species")
+}
+
+res <- microbenchmark(
+  tidy.sum(iris),
+  SE.sum(iris)
+)
+ggplot(res) +
+  geom_boxplot(aes(expr, time/1000)) +
+  labs(x = "function", y = "time in ms")
+
+```
+
 
 
 ## Boxplot
