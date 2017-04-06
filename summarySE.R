@@ -30,9 +30,11 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
                  measurevar
   )
   
-  # Rename the "mean" column    
-  datac <- rename(datac, c("mean" = measurevar))
+  # Rename the "mean" column 
   
+  # plyr and dplyr both provide a rename() function, you need specify which one
+  # to use if both libraries are loaded
+  datac <- plyr::rename(datac, c("mean" = measurevar))
   datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
   
   # Confidence interval multiplier for standard error
