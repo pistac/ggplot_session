@@ -197,7 +197,7 @@ g
 - Source: http://www.cookbook-r.com/Manipulating_data/Summarizing_data/ 
 
 ```{r, echo = T, tidy = T}
-source('C:/Users/itorre/PhD/programming/R programming/summarySE.R') 
+source('summarySE.R') 
 
 iris_error <- summarySE(iris, measurevar = "Petal.Width", groupvars = "Species")
 
@@ -424,6 +424,8 @@ g +
 - Package 'ggthemr': <https://github.com/cttobin/ggthemr>
 
 ```{r, echo = T, tidy = T}
+# This is not on CRAN yet. You need to install via
+# devtools::install_github('cttobin/ggthemr')
 library(ggthemr)
 ggthemr('fresh')
 g
