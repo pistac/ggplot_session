@@ -229,7 +229,7 @@ iris2 <- iris %>%
 
 If you want to compare the speed between the summarySE function and the tidyverse approach, run the following code. For small data sets like this it doesn't really matter, if you are working with more data it makes a difference...
 
-```{r, echo = F, fig.cap="speed comparisson between summarySE() and the tidy approach."}
+```{r, echo = F, fig.cap="speed comparison between summarySE() and the tidy approach."}
 library(microbenchmark)
 
 tidy.sum <- function(df){
@@ -326,7 +326,7 @@ axis.title = element_text(size = 14))
 
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Changing the axes names
 
@@ -336,7 +336,7 @@ g <- g +
 g
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Adding a title
 
@@ -345,7 +345,7 @@ g +
   labs(x = "Sepal Width", y = "Sepal Length", title = "Iris plot")
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Adding a title in a different way
 
@@ -356,7 +356,7 @@ g
 ```
 
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Custom colours
 
@@ -364,7 +364,7 @@ g
 coll <- c("violetred", "darkblue", "lightgreen")
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Custom colours
 
@@ -373,7 +373,7 @@ g +
   scale_color_manual(values = coll)
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Semi Custom colours
 
@@ -384,7 +384,7 @@ g +
 
 Some palette choices here: <http://www.r-bloggers.com/choosing-colour-palettes-part-ii-educated-choices/>
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Grey scales
 
@@ -394,7 +394,7 @@ g <- g +
 g
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Change legend title and names
 
@@ -415,7 +415,7 @@ g +
 
 But this creates 2 different legends!
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - The reason is that we only specified the "coloured" layer to have a new legend
 - We need to specify the "shaped" layer as well!
@@ -435,7 +435,7 @@ g <- g +
 g
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Print-friendly
 
@@ -445,7 +445,7 @@ g +
 
 ```
 
-## Messing around with the parameters
+## Messing around with parameters
 
 - Delete legend or part of
 
@@ -491,7 +491,8 @@ apatheme = theme_bw()+
 g + apatheme
 ```
 
-Note: the fond family argument caused an error in my machine; I solved it by running the windowsFonts() function just above. You might not encounter the error though!
+Note: the font family argument caused the following error in my machine: "Font family not found in Windows font database".
+I solved it by running the windowsFonts() function just above. You might not encounter this error though!
 
 ## Faceting
 
@@ -503,7 +504,7 @@ g +
 ## Faceting
 
 - 2 grouping variables
-- Iris only has one so add another one
+- Iris only has one so I will add another one
 
 ```{r, echo = T, tidy = T}
 iris2 <- iris
@@ -542,3 +543,5 @@ ggsave(g, file = "g.pdf")
 ggsave(g, file = "g.png")
 
 ```
+
+You can also run the regular pdf() or png() functions. ggsave will understand the format you want to save in from the file name extension.
