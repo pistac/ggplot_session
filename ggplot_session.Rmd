@@ -154,7 +154,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, shape = Species, colo
 
 ## Barplot
 
-``` {r, echo = T, tidy = T}
+```{r, echo = T, tidy = T}
 ggplot(data = iris, aes(x = Species, y = Petal.Width)) + 
   stat_summary(geom = "bar", fun.y = mean)
 ```
@@ -217,12 +217,13 @@ library(tidyverse)
 
 iris2 <- iris %>% 
 	group_by(Species) %>% 
-	summarise(
+	dplyr::summarise(
 	  N = n(),
 		mean = mean(Petal.Width), 
 		sd = sd(Petal.Width),
 		se = sd / sqrt(50),
-		ci = qt(.975, N - 1) * se ) 
+		ci = qt(.975, N - 1) * se
+	) 
 ```
 
 ---
