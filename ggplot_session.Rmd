@@ -226,6 +226,15 @@ iris2 <- iris %>%
 	) 
 ```
 
+Error bar plot with values from tidyverse.
+
+```{r, echo = T, tidy = T}
+g <- ggplot(data = iris2, aes(x = Species, y = mean, fill = Species)) + 
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = .2)
+g
+```
+
 ---
 
 If you want to compare the speed between the summarySE function and the tidyverse approach, run the following code. For small data sets like this it doesn't really matter, if you are working with more data it makes a difference...
